@@ -1,0 +1,29 @@
+{
+  "name": "3C-Cut Crop Capture",
+  "version": "0.9.4",
+  "manifest_version": 2,
+  "description": "Screen capture and edit you current page, the entire page, or only a selection of the page!",
+  "browser_action": {
+    "default_icon": "img/icon/icon.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "Choose a Capture Method!"
+  },
+  "permissions": [ 
+    "activeTab",
+    "storage",
+    "http://*/*"
+    ],
+  "icons": {
+    "24": "img/icon/icon24.png",
+    "48": "img/icon/icon48.png",
+    "128": "img/icon/icon128.png"
+  },
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "options_page": "options/options.html",
+    "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  }
+}

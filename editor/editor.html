@@ -1,0 +1,296 @@
+<html>
+<head>
+<title>3C Editor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/about.css">
+  <link rel="stylesheet" href="../css/social.css">
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+	<script type="text/javascript" src="../lib/jquery-ui.js"></script>
+	<script type="text/javascript" src="../lib/fabric.js"></script>
+<style>
+
+body{
+background-color: #333;
+background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.03) 35px, rgba(255,255,255,.05) 70px);
+}
+
+#canvas_main{
+  border: 1px solid black;
+  -webkit-box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.1), 0 0 3px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.1), 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+#btn_vrtx{
+  position: fixed;
+  Top: 0px;
+  right: 0px;
+}
+
+#cntnr {
+  position: absolute;  
+  top: 100px;
+  left: 100px;
+}
+
+#tbMain, #tbEditor, #tbEditor_Marker, #tbEditor_Shape {
+  position:absolute;
+  top:-164;
+  left:0;
+  transition: top 0.51s;  
+}
+
+#dlg_editor_text{
+    border:2px solid #444;
+    width:100px;
+    height:50px;
+    display:none;
+    opacity: 0.85;
+    position:absolute;
+    left:20%; 
+    top:10%;
+    margin:-25px 0 0 -50px;
+    border-radius:5px;
+    background: #555;
+    color: #aaa;
+    transition: opacity 0.251s;
+    box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.1), 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+#dlg_editor_text:hover{
+  opacity: 1;
+}
+
+.btnImage {
+   margin:5px; 
+   padding:5px; 
+}
+
+.btnImage:hover {
+    background: #555;
+    transition: background 0.51s;  
+}
+.btnImage:active {
+    background: #fff;
+}
+</style>
+</head>
+<body bgcolor="#FFFFFF">
+  <header>
+    <div id ="tbMain" class="container">
+      <nav>
+        <ul>
+          <li><h1><a id='btn_title' class="icon logo">3C Editor - Screen Capture Editor</a></h1></li>
+          <li><a id='btn_saveImage' class="icon save" download="3C-screenshot.png">Save Image</a></li>
+          <li><a id='btn_startEditor'  class="icon edit">Edit Image</a></li>
+          <!-- //To Be Added in once complete
+          <li><a class="icon share">Share</a></li>
+          -->
+          <li><a id='btn_settings' class="icon settings">Settings</a></li>
+          <li><a id='btn_help' class="icon help">help</a></li>
+          <li><a id='btn_about' class="icon aboot">About</a></li>
+          <li><a id='btn_vrtx' class="icon vrtx">Virtex Edge Design</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div id ="tbEditor" class="container">
+      <nav>
+        <ul>
+          <li><h1><a id='btn_title' class="icon logo">3C Editor - Image</a></h1></li>
+          <li><a id='btn_editor_marker' class="icon editor_marker">Marker</a></li>
+          <li><a id='btn_editor_shape' class="icon editor_shape">Add Shapes</a></li>
+          <li><a id='btn_editor_text' class="icon editor_text">Add Text</a></li>
+          <li><a id='btn_closeEditor' class="icon editor_close">Close Editor</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div id ="tbEditor_Marker" class="container">
+      <nav>
+        <ul>
+          <li><h1><a id='btn_title' class="icon editor_marker">3C Editor - Marker</a></h1></li>
+          <li><a id='btn_editor_marker_pencil' class="icon editor_pencil">Pencil</a></li>
+          <li><a id='btn_editor_marker_brush' class="icon editor_brush">Brush</a></li>
+          <!--<li><a id='btn_editor_marker_spray' class="icon editor_spray">Spray</a></li>-->
+          <li><a id='btn_editor_marker_close' class="icon editor_close">Back</a></li>
+        </ul>
+      </nav>
+    </div>
+    
+    <div id ="tbEditor_Shape" class="container">
+      <nav>
+        <ul>
+          <li><h1><a id='btn_title' class="icon editor_shape">3C Editor - Shapes</a></h1></li>
+          <li><a id='btn_editor_shape_line' class="icon editor_shape_line">Line</a></li>
+          <li><a id='btn_editor_shape_circle' class="icon editor_shape_crcl">Circle</a></li>
+          <li><a id='btn_editor_shape_sqaure' class="icon editor_shape_rect">Rectangle</a></li>
+          <li><a id='btn_editor_shape_triangle' class="icon editor_shape_tri">Triangle</a></li>
+          <li><a id='btn_editor_shape_close' class="icon editor_close">Back</a></li>
+        </ul>
+      </nav>
+    </div>
+    
+  </header>
+  
+<!--
+<div id="div_back">
+  <img id = "img_corner"></img>
+</div>
+-->
+<div id="div_main">
+  <canvas id="canvas_main"></canvas>
+</div>
+<div id="cntnr">
+  <canvas id="c" width="300" height="300" style="border:1px solid #ccc"></canvas>
+</div>
+
+<section class="about">
+  <a href="https://twitter.com/virtexedge" class="social-button social-button-tw" target="_blank">Follow</a>
+  <a href="https://www.facebook.com/virtexedgedesign" class="social-button social-button-fb" target="_blank">Like</a>
+  <a href="https://github.com/VirtexEdgeDesign/3C-Crop-Capture-Create/wiki" class="social-button social-button-gh" target="_blank">Fork</a>
+  <!--
+  <p class="about-author">
+    3C is provided under the <a href="https://github.com/VirtexEdgeDesign/3C-Crop-Capture-Create/blob/master/LICENSE" target="_blank">The MIT License.</a></a>
+  </p> 
+-->
+</section>
+
+<div id="dlg_editor_text" style="width:275px;height:300px;padding:2px;top:70%;left5%">
+  <!--<textarea bind-value-to="text"></textarea>-->
+  <div style="font-weight:bold;padding:2px">Toolbox</div>
+    <div id="dlg_container" style="color:#333;background:#aaa;border-radius:2px;padding:5px;">
+      <div id = "tlbx_main">
+          <p>
+          <table style="width:100%">
+            <tr><td><div style="font-weight:bold">Item</div></td></tr>
+            <tr>
+              <td><label for="tlbx_main_colour">Item Colour:</pre></label></td>
+              <td><input type="color" style="width:100%" value="" id="tlbx_main_colour" size="10"></td>		
+            </tr>
+            <tr>
+              <td><label for="tlbx_main_opacity">Item Opacity:</label></td>
+              <td><input  id="tlbx_main_opacity" value="100" type="range"></td>		
+            </tr>
+             <tr>
+              <td><label for="tlbx_main_colour">Item Position</pre></label></td>
+              <td>	
+                <button type="submit" id="btn_moveToFront16"><img src="../img/tlbx/moveToFront16.png" alt="moveToFront"></button>
+                <button type="submit" id="btn_moveForward16"><img src="../img/tlbx/moveForward16.png" alt="moveForward"></button>
+                <button type="submit" id="btn_moveBackwards16"><img src="../img/tlbx/moveBackwards16.png" alt="moveToFront"></button>
+                <button type="submit" id="btn_moveToBack16"><img src="../img/tlbx/moveToBack16.png" alt="moveForward"></button>
+            </td>
+            </tr>
+            <tr><td><div style="font-weight:bold"><br></div></td></tr>
+            <tr><td><div style="font-weight:bold">Border</div></td></tr>
+            <tr>  
+              <td><label for="tlbx_border_colour">Border Colour:</label></td>
+              <td><input id="tlbx_border_colour" type="color" style="width:100%" value="" size="10"></td>		
+            </tr>
+            <tr>
+              <td><label for="tlbx_border_size">Border Size: </label></td>
+              <td><input  id="tlbx_border_size" value="1" max ="20" type="range"></td>		
+            </tr>
+          </table>  
+          </p>
+      </div>
+      
+    <div id="tlbx_text">
+      <hr>
+      <div style="font-weight:bold">Text Properties</div>
+      <table style="width:100%">
+        
+  <tr>
+    <td><label for="text_fontFamily">Font family: </label></td>
+    <td>
+      <select id="text_fontFamily" style="width:100%" style="width:100px;">
+        <option value="arial">Arial</option>
+        <option value="helvetica" selected>Helvetica</option>
+        <option value="myriad pro">Myriad Pro</option>
+        <option value="delicious">Delicious</option>
+        <option value="verdana">Verdana</option>
+        <option value="georgia">Georgia</option>
+        <option value="courier">Courier</option>
+        <option value="comic sans ms">Comic Sans MS</option>
+        <option value="impact">Impact</option>
+        <option value="monaco">Monaco</option>
+        <option value="optima">Optima</option>
+        <option value="hoefler text">Hoefler Text</option>
+        <option value="plaster">Plaster</option>
+        <option value="engagement">Engagement</option>
+      </select>
+    </td>		
+  </tr>
+
+      <!--
+      <label for="text-align" style="display:inline-block">Text align:</label>
+      <select id="text-align" class="btn-object-action" bind-value-to="textAlign">
+        <option>Left</option>
+        <option>Center</option>
+        <option>Right</option>
+        <option>Justify</option>
+      </select>
+      <div>
+        <label for="text-bg-color">Background color:</label>
+        <input type="color" value="" id="text-bg-color" size="10" class="btn-object-action"
+          bind-value-to="bgColor">
+      </div>
+      <div>
+        <label for="text-lines-bg-color">Background text color:</label>
+        <input type="color" value="" id="text-lines-bg-color" size="10" class="btn-object-action"
+          bind-value-to="textBgColor">
+      </div>
+      <div>
+        <label for="text-stroke-color">Stroke color:</label>
+        <input type="color" value="" id="text-stroke-color" class="btn-object-action"
+          bind-value-to="strokeColor">
+      </div>
+      <div>
+        <label for="text-stroke-width">Stroke width:</label>
+        <input type="range" value="1" min="1" max="5" id="text-stroke-width" class="btn-object-action"
+          bind-value-to="strokeWidth">
+      </div>
+      <div>
+        <label for="text-font-size">Font size:</label>
+        <input type="range" value="" min="1" max="120" step="1" id="text-font-size" class="btn-object-action"
+          bind-value-to="fontSize">
+      </div>
+      <div>
+        <label for="text-line-height">Line height:</label>
+        <input type="range" value="" min="0" max="10" step="0.1" id="text-line-height" class="btn-object-action"
+          bind-value-to="lineHeight">
+      </div>
+    </div>
+    <div id="text-controls-additional">
+      <button type="button" class="btn btn-object-action"
+        ng-click="toggleBold()"
+        ng-class="{'btn-inverse': isBold()}">
+        Bold
+      </button>
+      <button type="button" class="btn btn-object-action" id="text-cmd-italic"
+        ng-click="toggleItalic()"
+        ng-class="{'btn-inverse': isItalic()}">
+        Italic
+      </button>
+      <button type="button" class="btn btn-object-action" id="text-cmd-underline"
+        ng-click="toggleUnderline()"
+        ng-class="{'btn-inverse': isUnderline()}">
+        Underline
+      </button>
+      <button type="button" class="btn btn-object-action" id="text-cmd-linethrough"
+        ng-click="toggleLinethrough()"
+        ng-class="{'btn-inverse': isLinethrough()}">
+        Linethrough
+      </button>
+      <button type="button" class="btn btn-object-action" id="text-cmd-overline"
+        ng-click="toggleOverline()"
+        ng-class="{'btn-inverse': isOverline()}">
+        Overline
+      </button>
+    </div>
+    -->
+    </div>
+  </div>
+</div>
+</body>
+
+<script src="editor.js"></script>
+</html>
