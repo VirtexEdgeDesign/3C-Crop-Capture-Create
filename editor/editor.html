@@ -1,296 +1,444 @@
 <html>
+
 <head>
-<title>3C Editor</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-  <link rel="stylesheet" href="../css/style.css">
+  <title>3C Editor</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link rel="stylesheet" href="bootstrap.css">
+  <!--<link rel="stylesheet" href="../css/style.css">-->
   <link rel="stylesheet" href="../css/about.css">
   <link rel="stylesheet" href="../css/social.css">
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
-	<script type="text/javascript" src="../lib/jquery-ui.js"></script>
-	<script type="text/javascript" src="../lib/fabric.js"></script>
-<style>
-
-body{
-background-color: #333;
-background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.03) 35px, rgba(255,255,255,.05) 70px);
-}
-
-#canvas_main{
-  border: 1px solid black;
-  -webkit-box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.1), 0 0 3px rgba(0, 0, 0, 0.8);
-  box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.1), 0 0 10px rgba(0, 0, 0, 0.8);
-}
-
-#btn_vrtx{
-  position: fixed;
-  Top: 0px;
-  right: 0px;
-}
-
-#cntnr {
-  position: absolute;  
-  top: 100px;
-  left: 100px;
-}
-
-#tbMain, #tbEditor, #tbEditor_Marker, #tbEditor_Shape {
-  position:absolute;
-  top:-164;
-  left:0;
-  transition: top 0.51s;  
-}
-
-#dlg_editor_text{
-    border:2px solid #444;
-    width:100px;
-    height:50px;
-    display:none;
-    opacity: 0.85;
-    position:absolute;
-    left:20%; 
-    top:10%;
-    margin:-25px 0 0 -50px;
-    border-radius:5px;
-    background: #555;
-    color: #aaa;
-    transition: opacity 0.251s;
-    box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.1), 0 0 20px rgba(0, 0, 0, 0.8);
-}
-
-#dlg_editor_text:hover{
-  opacity: 1;
-}
-
-.btnImage {
-   margin:5px; 
-   padding:5px; 
-}
-
-.btnImage:hover {
-    background: #555;
-    transition: background 0.51s;  
-}
-.btnImage:active {
-    background: #fff;
-}
-</style>
+  <script type="text/javascript" src="../lib/jquery-ui.js"></script>
+  <script type="text/javascript" src="../lib/fabric.js"></script>
+  <script type="text/javascript" src="../js/uploadr.js"></script>
+  <script type="text/javascript" src="../js/postr.js"></script>
+  <link rel="stylesheet" href="editor.css">
 </head>
+
 <body bgcolor="#FFFFFF">
   <header>
-    <div id ="tbMain" class="container">
+    <div id="tbMain" class="container">
       <nav>
         <ul>
-          <li><h1><a id='btn_title' class="icon logo">3C Editor - Screen Capture Editor</a></h1></li>
-          <li><a id='btn_saveImage' class="icon save" download="3C-screenshot.png">Save Image</a></li>
-          <li><a id='btn_startEditor'  class="icon edit">Edit Image</a></li>
+          <li>
+            <a id='btn_title' class="icon logo">3C Editor - Screen Capture Editor</a>
+          </li>
+          <li>
+            <a id='btn_shareImage' class="icon save">Save & Share Image</a>
+          </li>
+          <li>
+            <a id='btn_startEditor' class="icon edit">Edit Image</a>
+          </li>
           <!-- //To Be Added in once complete
           <li><a class="icon share">Share</a></li>
           -->
-          <li><a id='btn_settings' class="icon settings">Settings</a></li>
-          <li><a id='btn_help' class="icon help">help</a></li>
-          <li><a id='btn_about' class="icon aboot">About</a></li>
-          <li><a id='btn_vrtx' class="icon vrtx">Virtex Edge Design</a></li>
+          <li>
+            <a id='btn_settings' class="icon settings">Settings</a>
+          </li>
+          <li>
+            <a id='btn_help' class="icon help">help</a>
+          </li>
+          <li>
+            <a id='btn_about' class="icon aboot">About</a>
+          </li>
+          <li>
+            <a id='btn_vrtx' class="icon vrtx">Virtex Edge Design</a>
+          </li>
         </ul>
       </nav>
     </div>
-    <div id ="tbEditor" class="container">
+    <div id="tbEditor" class="container">
       <nav>
         <ul>
-          <li><h1><a id='btn_title' class="icon logo">3C Editor - Image</a></h1></li>
-          <li><a id='btn_editor_marker' class="icon editor_marker">Marker</a></li>
-          <li><a id='btn_editor_shape' class="icon editor_shape">Add Shapes</a></li>
-          <li><a id='btn_editor_text' class="icon editor_text">Add Text</a></li>
-          <li><a id='btn_closeEditor' class="icon editor_close">Close Editor</a></li>
+          <li>
+            <ul>
+              <a id='btn_title' class="icon logo">3C Editor - Image</a>
+            </ul>
+          </li>
+          <li>
+            <a id='btn_editor_marker' class="icon editor_marker">Marker</a>
+          </li>
+          <li>
+            <a id='btn_editor_shape' class="icon editor_shape">Add Shapes</a>
+          </li>
+          <li>
+            <a id='btn_editor_text' class="icon editor_text">Add Text</a>
+          </li>
+          <li>
+            <a id='btn_closeEditor' class="icon editor_close">Close Editor</a>
+          </li>
         </ul>
       </nav>
     </div>
-    <div id ="tbEditor_Marker" class="container">
+    <div id="tbEditor_Marker" class="container">
       <nav>
         <ul>
-          <li><h1><a id='btn_title' class="icon editor_marker">3C Editor - Marker</a></h1></li>
-          <li><a id='btn_editor_marker_pencil' class="icon editor_pencil">Pencil</a></li>
-          <li><a id='btn_editor_marker_brush' class="icon editor_brush">Brush</a></li>
+          <li>
+            <ul>
+              <a id='btn_title' class="icon editor_marker">3C Editor - Marker</a>
+            </ul>
+          </li>
+          <li>
+            <a id='btn_editor_marker_pencil' class="icon editor_pencil">Pencil</a>
+          </li>
+          <li>
+            <a id='btn_editor_marker_brush' class="icon editor_brush">Brush</a>
+          </li>
           <!--<li><a id='btn_editor_marker_spray' class="icon editor_spray">Spray</a></li>-->
-          <li><a id='btn_editor_marker_close' class="icon editor_close">Back</a></li>
+          <li>
+            <a id='btn_editor_marker_close' class="icon editor_close">Back</a>
+          </li>
         </ul>
       </nav>
     </div>
-    
-    <div id ="tbEditor_Shape" class="container">
+
+    <div id="tbEditor_Shape" class="container">
       <nav>
         <ul>
-          <li><h1><a id='btn_title' class="icon editor_shape">3C Editor - Shapes</a></h1></li>
-          <li><a id='btn_editor_shape_line' class="icon editor_shape_line">Line</a></li>
-          <li><a id='btn_editor_shape_circle' class="icon editor_shape_crcl">Circle</a></li>
-          <li><a id='btn_editor_shape_sqaure' class="icon editor_shape_rect">Rectangle</a></li>
-          <li><a id='btn_editor_shape_triangle' class="icon editor_shape_tri">Triangle</a></li>
-          <li><a id='btn_editor_shape_close' class="icon editor_close">Back</a></li>
+          <li>
+            <ul>
+              <a id='btn_title' class="icon editor_shape">3C Editor - Shapes</a>
+            </ul>
+          </li>
+          <li>
+            <a id='btn_editor_shape_line' class="icon editor_shape_line">Line</a>
+          </li>
+          <li>
+            <a id='btn_editor_shape_circle' class="icon editor_shape_crcl">Circle</a>
+          </li>
+          <li>
+            <a id='btn_editor_shape_sqaure' class="icon editor_shape_rect">Rectangle</a>
+          </li>
+          <li>
+            <a id='btn_editor_shape_triangle' class="icon editor_shape_tri">Triangle</a>
+          </li>
+          <li>
+            <a id='btn_editor_shape_close' class="icon editor_close">Back</a>
+          </li>
         </ul>
       </nav>
     </div>
-    
+    <div id="tbShare" class="container">
+      <nav>
+        <ul>
+          <li>
+            <ul>
+              <a id='btn_title' class="icon logo">3C Editor - Share Image</a>
+            </ul>
+          </li>
+          <li>
+            <a id='btn_saveImage' class="icon save" download="3C-screenshot.png">Save</a>
+          </li>
+          <li>
+            <a id='btn_shareTooImgur' class="icon share_imgur">Share To Imgur</a>
+          </li>
+          <li>
+            <a id='btn_postToTwitter' class="icon share_twitter">Tweet</a>
+          </li>
+          <li>
+            <a id='btn_postToFacebook' class="icon share_facebook">Post</a>
+          </li>
+          <li>
+            <a id='btn_postToPinterest' class="icon share_pinterest">Pin</a>
+          </li>
+          <li>
+            <a id='btn_postToReddit' class="icon share_reddit">Share</a>
+          </li>
+          <!--
+          <li>
+            <a id='btn_copyToClipboard' class="icon share_imgur">Copy to Clipboard</a>
+          </li>
+          -->
+          <li>
+            <a id='btn_closeShare' class="icon editor_close">Back</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </header>
-  
-<!--
-<div id="div_back">
-  <img id = "img_corner"></img>
-</div>
--->
-<div id="div_main">
-  <canvas id="canvas_main"></canvas>
-</div>
-<div id="cntnr">
-  <canvas id="c" width="300" height="300" style="border:1px solid #ccc"></canvas>
-</div>
 
-<section class="about">
-  <a href="https://twitter.com/virtexedge" class="social-button social-button-tw" target="_blank">Follow</a>
-  <a href="https://www.facebook.com/virtexedgedesign" class="social-button social-button-fb" target="_blank">Like</a>
-  <a href="https://github.com/VirtexEdgeDesign/3C-Crop-Capture-Create/wiki" class="social-button social-button-gh" target="_blank">Fork</a>
-  <!--
+  <div id="div_main">
+    <canvas id="canvas_main" width="0" height="0"></canvas>
+  </div>
+  <div id="cntnr">
+    <canvas id="c" width="0" height="0" style=""></canvas>
+  </div>
+
+  <!-- The Imgur Upload Modal -->
+  <div id="modal-share-imgur" class="modal" style="z-index: 1000000;">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <!--<span class="close">&times;</span>-->
+      <h3 id="model_imgur_title" data-icon='imgur'>Uploading Image to Imgur</h3>
+      <br>
+      <div id="div-uploading">
+        <p>We're uploading your image to Imgur. When it's finished it will open in a new tab.</p>
+        <br>
+        <div class="progress">
+          <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+            aria-valuemax="100" style="width: 100%">
+            <span id="progressbar_text">Uploading
+              <span class="dotdotdot"></span>
+            </span>
+          </div>
+        </div>
+        <br>
+        <p>For large files, this may take a while.</p>
+      </div>
+      <div id="div-sucess">
+        <p>Your image has been successfully uploaded to Imgur! You can access it at
+          <a id=success_text href="#" target="_blank">insert link here</a>
+        </p>
+      </div>
+      <div id="div-error">
+        <p>There was an error uploading the image. You can try again.</p>
+        <p>If the error persists, let us know on
+          <a href="https://www.reddit.com/r/virtexedgedesign/" target="_blank">reddit</a> or file a
+          <a href="https://github.com/VirtexEdgeDesign/3C-Crop-Capture-Create/issues" target="_blank">Github issue!</a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- The Share to Imgur Prompt Modal -->
+  <div id="modal-share-prompt" class="modal" style="z-index: 1000000;">
+    <!-- Modal content 85BF25-->
+    <div class="modal-content" style="margin: 10% auto;">
+      <h3 id="model_share_title">Use Imgur to Host Image?</h3>
+      <div id="modal_share_prompt_main">
+        <p>Capture Crop Create(3C) uses
+          <a href="https://imgur.com/" target="_blank" style="color:rgb(119, 168, 34);font-weight: bold;">Imgur</a> to host your image when you share it to other platforms like Twitter, Facebook, Pinterest etc...
+        </p>
+        <br>
+        <p>
+          The next page will ask you to link your Imgur account to 3C. If you don't have an Imgur account, you can create one using
+          your Twitter, Facebook or Google Account on the next page.
+        </p>
+        <br>
+        <p>
+          If you don't want to use Imgur, click 'go back' below, save the image to your hard drive and share it manually from your
+          platform of your choice!
+        </p>
+      </div>
+      <br>
+      <div style="width:100%;margin:auto">
+        <table style="width:90%;margin: 0 auto;">
+          <tr>
+            <th>
+              <button class='ui-button' id="btn_dontUseImgur">
+                Go Back
+              </button>
+            </th>
+            <th>
+              <button class='ui-button' id="btn_useImgur" style="float:right">
+                Continue
+              </button>
+            </th>
+          </tr>
+          <tr>
+            <td>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <br>
+      <p style="font-size: 10px">
+        Note:
+        <a href="https://virtexedgedesign.com/3c-crop-capture-create/" target="_blank" style="color:rgb(0, 102, 255)">Capture Crop Create (3C)</a> and
+        <a href="https://virtexedgedesign.com/" target="_blank" style="color:rgb(0, 102, 255)">Virtex Edge Design</a> are not affliated with Imgur.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- The Modal -->
+  <div id="modal-share-general" class="modal" style="z-index: 1000000;">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3 id="model_share_title">Sharing Picture</h3>
+      <div id="modal_share_uploading">
+        <p>Sharing Picture, Please Wait...</p>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+            style="width: 100%">
+            <span id="progressbar_text">Sharing
+              <span class="dotdotdot"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div id="modal_share_success">
+        <p>Your image has been shared successfully!</p>
+        <table style="width:100%;text-align:center">
+          <tr>
+            <th>
+              <p>If you're enjoying 3C, let us know and leave us a review!</p>
+              <br>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <button class='ui-button' id="btn_review">
+                Review 3C!
+              </button>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width:100%;text-align:center">
+          <tr>
+            <th>
+              <a href="https://twitter.com/virtexedge" class="twitter-follow-button" target="_blank">Follow @virtexedge</a>
+            </th>
+            <th>
+              <a style="float: right;" href="https://github.com/VirtexEdgeDesign/3C-Crop-Capture-Create/" class="social-button social-button-gh"
+                target="_blank">View 3C on Github</a>
+            </th>
+          </tr>
+          <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <section class="about">
+    <a href="https://chrome.google.com/webstore/detail/3c-capture-crop-create/mjcdmlibiooblijamnolhajjigcmhglp/reviews" class="social-button-rvw"
+      target="_blank">Review Us!</a>
+    <a href="https://twitter.com/virtexedge" class="social-button social-button-tw" target="_blank">Follow</a>
+    <a href="https://www.facebook.com/virtexedgedesign" class="social-button social-button-fb" target="_blank">Like</a>
+    <a href="https://github.com/VirtexEdgeDesign" class="social-button social-button-gh" target="_blank">Follow</a>
+    <!--
   <p class="about-author">
     3C is provided under the <a href="https://github.com/VirtexEdgeDesign/3C-Crop-Capture-Create/blob/master/LICENSE" target="_blank">The MIT License.</a></a>
   </p> 
 -->
-</section>
+  </section>
 
-<div id="dlg_editor_text" style="width:275px;height:300px;padding:2px;top:70%;left5%">
-  <!--<textarea bind-value-to="text"></textarea>-->
-  <div style="font-weight:bold;padding:2px">Toolbox</div>
+  <div id="dlg_editor_text" style="width:275px;height:300px;padding:2px;top:70%;">
+    <!--<textarea bind-value-to="text"></textarea>-->
+    <div style="">Toolbox</div>
     <div id="dlg_container" style="color:#333;background:#aaa;border-radius:2px;padding:5px;">
-      <div id = "tlbx_main">
-          <p>
+      <div id="tlbx_main">
+        <p>
           <table style="width:100%">
-            <tr><td><div style="font-weight:bold">Item</div></td></tr>
             <tr>
-              <td><label for="tlbx_main_colour">Item Colour:</pre></label></td>
-              <td><input type="color" style="width:100%" value="" id="tlbx_main_colour" size="10"></td>		
-            </tr>
-            <tr>
-              <td><label for="tlbx_main_opacity">Item Opacity:</label></td>
-              <td><input  id="tlbx_main_opacity" value="100" type="range"></td>		
-            </tr>
-             <tr>
-              <td><label for="tlbx_main_colour">Item Position</pre></label></td>
-              <td>	
-                <button type="submit" id="btn_moveToFront16"><img src="../img/tlbx/moveToFront16.png" alt="moveToFront"></button>
-                <button type="submit" id="btn_moveForward16"><img src="../img/tlbx/moveForward16.png" alt="moveForward"></button>
-                <button type="submit" id="btn_moveBackwards16"><img src="../img/tlbx/moveBackwards16.png" alt="moveToFront"></button>
-                <button type="submit" id="btn_moveToBack16"><img src="../img/tlbx/moveToBack16.png" alt="moveForward"></button>
-            </td>
-            </tr>
-            <tr><td><div style="font-weight:bold"><br></div></td></tr>
-            <tr><td><div style="font-weight:bold">Border</div></td></tr>
-            <tr>  
-              <td><label for="tlbx_border_colour">Border Colour:</label></td>
-              <td><input id="tlbx_border_colour" type="color" style="width:100%" value="" size="10"></td>		
+              <td>
+                <div style="font-weight:bold">Item</div>
+              </td>
             </tr>
             <tr>
-              <td><label for="tlbx_border_size">Border Size: </label></td>
-              <td><input  id="tlbx_border_size" value="1" max ="20" type="range"></td>		
+              <td>
+                <label for="tlbx_main_colour">Item Colour:</pre>
+                </label>
+              </td>
+              <td>
+                <input type="color" style="width:100%" value="" id="tlbx_main_colour" size="10">
+              </td>
             </tr>
-          </table>  
-          </p>
+            <tr>
+              <td>
+                <label for="tlbx_main_opacity">Item Opacity:</label>
+              </td>
+              <td>
+                <input id="tlbx_main_opacity" value="100" type="range">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="tlbx_main_colour">Item Position</pre>
+                </label>
+              </td>
+              <td>
+                <button type="submit" id="btn_moveToFront16">
+                  <img src="../img/tlbx/moveToFront16.png" alt="moveToFront">
+                </button>
+                <button type="submit" id="btn_moveForward16">
+                  <img src="../img/tlbx/moveForward16.png" alt="moveForward">
+                </button>
+                <button type="submit" id="btn_moveBackwards16">
+                  <img src="../img/tlbx/moveBackwards16.png" alt="moveToFront">
+                </button>
+                <button type="submit" id="btn_moveToBack16">
+                  <img src="../img/tlbx/moveToBack16.png" alt="moveForward">
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-weight:bold">
+                  <br>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-weight:bold">Border</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="tlbx_border_colour">Border Colour:</label>
+              </td>
+              <td>
+                <input id="tlbx_border_colour" type="color" style="width:100%" value="" size="10">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="tlbx_border_size">Border Size: </label>
+              </td>
+              <td>
+                <input id="tlbx_border_size" value="1" max="20" type="range">
+              </td>
+            </tr>
+          </table>
+        </p>
       </div>
-      
-    <div id="tlbx_text">
-      <hr>
-      <div style="font-weight:bold">Text Properties</div>
-      <table style="width:100%">
-        
-  <tr>
-    <td><label for="text_fontFamily">Font family: </label></td>
-    <td>
-      <select id="text_fontFamily" style="width:100%" style="width:100px;">
-        <option value="arial">Arial</option>
-        <option value="helvetica" selected>Helvetica</option>
-        <option value="myriad pro">Myriad Pro</option>
-        <option value="delicious">Delicious</option>
-        <option value="verdana">Verdana</option>
-        <option value="georgia">Georgia</option>
-        <option value="courier">Courier</option>
-        <option value="comic sans ms">Comic Sans MS</option>
-        <option value="impact">Impact</option>
-        <option value="monaco">Monaco</option>
-        <option value="optima">Optima</option>
-        <option value="hoefler text">Hoefler Text</option>
-        <option value="plaster">Plaster</option>
-        <option value="engagement">Engagement</option>
-      </select>
-    </td>		
-  </tr>
 
-      <!--
-      <label for="text-align" style="display:inline-block">Text align:</label>
-      <select id="text-align" class="btn-object-action" bind-value-to="textAlign">
-        <option>Left</option>
-        <option>Center</option>
-        <option>Right</option>
-        <option>Justify</option>
-      </select>
-      <div>
-        <label for="text-bg-color">Background color:</label>
-        <input type="color" value="" id="text-bg-color" size="10" class="btn-object-action"
-          bind-value-to="bgColor">
+      <div id="tlbx_text">
+        <hr>
+        <div style="font-weight:bold">Text Properties</div>
+        <table style="width:100%">
+
+          <tr>
+            <td>
+              <label for="text_fontFamily">Font family: </label>
+            </td>
+            <td>
+              <select id="text_fontFamily" style="width:100%" style="width:100px;">
+                <option value="arial">Arial</option>
+                <option value="helvetica" selected>Helvetica</option>
+                <option value="myriad pro">Myriad Pro</option>
+                <option value="delicious">Delicious</option>
+                <option value="verdana">Verdana</option>
+                <option value="georgia">Georgia</option>
+                <option value="courier">Courier</option>
+                <option value="comic sans ms">Comic Sans MS</option>
+                <option value="impact">Impact</option>
+                <option value="monaco">Monaco</option>
+                <option value="optima">Optima</option>
+                <option value="hoefler text">Hoefler Text</option>
+                <option value="plaster">Plaster</option>
+                <option value="engagement">Engagement</option>
+              </select>
+            </td>
+          </tr>
       </div>
-      <div>
-        <label for="text-lines-bg-color">Background text color:</label>
-        <input type="color" value="" id="text-lines-bg-color" size="10" class="btn-object-action"
-          bind-value-to="textBgColor">
-      </div>
-      <div>
-        <label for="text-stroke-color">Stroke color:</label>
-        <input type="color" value="" id="text-stroke-color" class="btn-object-action"
-          bind-value-to="strokeColor">
-      </div>
-      <div>
-        <label for="text-stroke-width">Stroke width:</label>
-        <input type="range" value="1" min="1" max="5" id="text-stroke-width" class="btn-object-action"
-          bind-value-to="strokeWidth">
-      </div>
-      <div>
-        <label for="text-font-size">Font size:</label>
-        <input type="range" value="" min="1" max="120" step="1" id="text-font-size" class="btn-object-action"
-          bind-value-to="fontSize">
-      </div>
-      <div>
-        <label for="text-line-height">Line height:</label>
-        <input type="range" value="" min="0" max="10" step="0.1" id="text-line-height" class="btn-object-action"
-          bind-value-to="lineHeight">
-      </div>
-    </div>
-    <div id="text-controls-additional">
-      <button type="button" class="btn btn-object-action"
-        ng-click="toggleBold()"
-        ng-class="{'btn-inverse': isBold()}">
-        Bold
-      </button>
-      <button type="button" class="btn btn-object-action" id="text-cmd-italic"
-        ng-click="toggleItalic()"
-        ng-class="{'btn-inverse': isItalic()}">
-        Italic
-      </button>
-      <button type="button" class="btn btn-object-action" id="text-cmd-underline"
-        ng-click="toggleUnderline()"
-        ng-class="{'btn-inverse': isUnderline()}">
-        Underline
-      </button>
-      <button type="button" class="btn btn-object-action" id="text-cmd-linethrough"
-        ng-click="toggleLinethrough()"
-        ng-class="{'btn-inverse': isLinethrough()}">
-        Linethrough
-      </button>
-      <button type="button" class="btn btn-object-action" id="text-cmd-overline"
-        ng-click="toggleOverline()"
-        ng-class="{'btn-inverse': isOverline()}">
-        Overline
-      </button>
-    </div>
-    -->
     </div>
   </div>
-</div>
+
 </body>
 
 <script src="editor.js"></script>
+
 </html>

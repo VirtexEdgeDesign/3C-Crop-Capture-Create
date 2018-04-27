@@ -1,0 +1,470 @@
+body {
+  padding-top: 37px;
+  font: 13px/18px 'Lucida Grande', Tahoma, Verdana, sans-serif;
+  font-weight: normal;
+  color: #404040;
+  background: #696969;
+  background-color: #333;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 35px,
+    rgba(255, 255, 255, 0.03) 35px,
+    rgba(255, 255, 255, 0.05) 70px
+  );
+}
+
+.container {
+  position: absolute;
+  top: 0px;
+  /*width: 800px;*/
+  margin: 0 0 0 0;
+  padding: 0;
+  margin: 0;
+}
+ol,
+ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 12px;
+}
+
+header {
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  height: 48px;
+  line-height: 48px;
+  color: #ddd;
+  text-shadow: 0 -1px black;
+  background: #243942;
+  border-bottom: 1px solid #191919;
+  background-image: -webkit-linear-gradient(
+    top,
+    #243942,
+    #22373f 50%,
+    #1d2e35 50%,
+    #1b2b32
+  );
+  background-image: -moz-linear-gradient(
+    top,
+    #243942,
+    #22373f 50%,
+    #1d2e35 50%,
+    #1b2b32
+  );
+  background-image: -o-linear-gradient(
+    top,
+    #243942,
+    #22373f 50%,
+    #1d2e35 50%,
+    #1b2b32
+  );
+  background-image: linear-gradient(
+    to bottom,
+    #243942,
+    #22373f 50%,
+    #1d2e35 50%,
+    #1b2b32
+  );
+  -webkit-box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 3px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 10px rgba(0, 0, 0, 0.8);
+}
+header a {
+  -webkit-transition: 0.1s ease-out;
+  -moz-transition: 0.1s ease-out;
+  -o-transition: 0.1s ease-out;
+  transition: 0.1s ease-out;
+  -webkit-transition-property: background, color;
+  -moz-transition-property: background, color;
+  -o-transition-property: background, color;
+  transition-property: background, color;
+}
+header h1 {
+  float: left;
+}
+header h1 a {
+  display: block;
+  padding: 0 15px;
+  font-size: 16px;
+  color: #eee;
+  text-decoration: none;
+}
+header h1 a:hover {
+  color: white;
+}
+header nav {
+  padding: 0;
+  margin: 0;
+  float: left;
+  border-left: 1px solid #2f4b56;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid #111;
+}
+header nav li {
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+header nav ul {
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+header nav a {
+  display: block;
+  padding: 0 15px;
+  color: #d0d9de;
+  text-decoration: none;
+  border-left: 1px solid #191919;
+  border-right: 1px solid #2f4b56;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+header nav a:hover {
+  text-decoration: none;
+  color: #d0d9de;
+  background: rgba(100, 255, 255, 0.21);
+}
+#btn_title {
+  background: rgba(100, 255, 255, 0.05);
+}
+#btn_title:hover {
+  cursor: default;
+}
+header nav a.icon {
+  padding-left: 40px;
+  background-position: 12px 11px;
+  background-repeat: no-repeat;
+}
+header nav a.logo::before {
+  content: url('../img/icon/icon24.png');
+  position: relative;
+  top: 6px;
+  left: -12px;
+}
+header nav a.save {
+  background-image: url('../img/tlbr/save.png');
+}
+header nav a.edit {
+  background-image: url('../img/tlbr/edit.png');
+}
+header nav a.share {
+  background-image: url('../img/tlbr/share.png');
+}
+header nav a.help {
+  background-image: url('../img/tlbr/help.png');
+}
+header nav a.settings {
+  background-image: url('../img/tlbr/settings.png');
+}
+header nav a.aboot {
+  background-image: url('../img/tlbr/about.png');
+}
+header nav a.vrtx {
+  background-image: url('../img/vrtx_logo/vrtx_logo24.png');
+}
+header nav a.share_imgur {
+  background-image: url('../img/social/imgur/imgur_24.png');
+}
+header nav a.share_facebook {
+  background-image: url('../img/social/facebook/image.png');
+}
+header nav a.share_twitter {
+  background-image: url('../img/social/twitter/image.png');
+}
+header nav a.share_pinterest {
+  background-image: url('../img/social/pinterest/image.png');
+}
+
+header nav a.share_reddit {
+  background-image: url('../img/social/reddit/image.png');
+}
+
+/*Marker Editor*/
+header nav a.editor_marker::before {
+  content: url('../img/tlbr/editor/marker.png');
+  position: relative;
+  top: 6px;
+  left: -12px;
+}
+header nav a.editor_pencil {
+  background-image: url('../img/tlbr/editor/pencil.png');
+}
+header nav a.editor_brush {
+  background-image: url('../img/tlbr/editor/brush.png');
+}
+header nav a.editor_spray {
+  background-image: url('../img/tlbr/editor/spray.png');
+}
+
+header nav a.editor_shape::before {
+  content: url('../img/tlbr/editor/shape.png');
+  position: relative;
+  top: 6px;
+  left: -12px;
+}
+header nav a.editor_shape_line {
+  background-image: url('../img/tlbr/editor/shapes/line.png');
+}
+header nav a.editor_shape_crcl {
+  background-image: url('../img/tlbr/editor/shapes/crcl.png');
+}
+header nav a.editor_shape_rect {
+  background-image: url('../img/tlbr/editor/shapes/rect.png');
+}
+header nav a.editor_shape_tri {
+  background-image: url('../img/tlbr/editor/shapes/tri.png');
+}
+
+header nav a.editor_text {
+  background-image: url('../img/tlbr/editor/text.png');
+}
+
+header nav a.editor_close {
+  background-image: url('../img/tlbr/editor/close.png');
+}
+
+header nav li.active a,
+header nav a:active {
+  padding-right: 16px;
+  background-color: #1b2b32;
+  border-right: 0;
+  -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.7);
+}
+header nav span {
+  display: inline-block;
+  vertical-align: text-top;
+  margin-left: 10px;
+  padding: 0 5px;
+  line-height: 16px;
+  font-size: 11px;
+  color: white;
+  text-shadow: 0 1px #902a27;
+  background: #e93631;
+  border-radius: 2px;
+  background-image: -webkit-linear-gradient(top, #f65d5f, #e93631);
+  background-image: -moz-linear-gradient(top, #f65d5f, #e93631);
+  background-image: -o-linear-gradient(top, #f65d5f, #e93631);
+  background-image: linear-gradient(to bottom, #f65d5f, #e93631);
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.2),
+    0 1px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.2);
+}
+
+#canvas_main {
+  border: 1px solid black;
+  -webkit-box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 3px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+#btn_vrtx {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+
+#cntnr {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+}
+
+#tbMain,
+#tbEditor,
+#tbEditor_Marker,
+#tbEditor_Shape,
+#tbShare {
+  position: absolute;
+  top: -164;
+  left: 0;
+  transition: top 0.51s;
+}
+
+#dlg_editor_text {
+  border: 2px solid #444;
+  width: 100px;
+  height: 50px;
+  display: none;
+  opacity: 0.85;
+  position: absolute;
+  left: 20%;
+  top: 10%;
+  margin: -25px 0 0 -50px;
+  border-radius: 5px;
+  background: #555;
+  color: #aaa;
+  transition: opacity 0.251s;
+  box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+#dlg_editor_text:hover {
+  opacity: 1;
+}
+
+.btnImage {
+  margin: 5px;
+  padding: 5px;
+}
+
+.btnImage:hover {
+  background: #555;
+  transition: background 0.51s;
+}
+
+.btnImage:active {
+  background: #fff;
+}
+
+/* The Modal (background) */
+
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: absolute;
+  /* Stay in place */
+  z-index: 100000;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: none;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  z-index: 100000;
+  padding: 10px;
+  border: 1px solid #333;
+  width: 40%;
+  /* Could be more or less, depending on screen size */
+}
+.modal-content h3 {
+  margin: 3px;
+  padding: 0px 0px 10px 0px;
+}
+
+.modal-content h3[data-icon='imgur']:before {
+  content: url('../img/social/imgur/imgur_32.png');
+}
+.modal-content h3:before {
+  content: url('../img/social/share/image.png');
+  position: relative;
+  top: 5px;
+  left: -5px;
+}
+
+.modal-content p {
+  margin: 2px;
+  padding: 0px 0px 5px 15px;
+}
+/* The Close Button */
+
+.close {
+  color: rgb(49, 49, 49);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: rgb(0, 183, 255);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.progress {
+  margin: 5px;
+  border: #777 thin solid;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 35px,
+    rgba(255, 255, 255, 0.03) 35px,
+    rgba(255, 255, 255, 0.05) 70px
+  );
+}
+
+.progress .progress-bar.active {
+  font-weight: 700;
+  animation: progress-bar-stripes 0.5s linear infinite;
+}
+
+.dotdotdot:after {
+  font-weight: 300;
+  content: '...';
+  display: inline-block;
+  width: 20px;
+  text-align: left;
+  animation: dotdotdot 1.5s linear infinite;
+}
+
+@keyframes dotdotdot {
+  0% {
+    content: '...';
+  }
+  25% {
+    content: '';
+  }
+  50% {
+    content: '.';
+  }
+  75% {
+    content: '..';
+  }
+}
+
+.ui-button {
+  background: #ffffff;
+  background-image: linear-gradient(to bottom, #ff00aa, #c90097);
+  -webkit-border-radius: 6;
+  -moz-border-radius: 6;
+  border-radius: 3px;
+  text-shadow: 1px 1px 0px #000000;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 5px 20px 5px 20px;
+  text-decoration: none;
+  width: 200px;
+  height: 48px;
+  border: 1px #8a3073 solid;
+}
+
+.ui-button a {
+  height: 24px;
+}
+.ui-button:hover {
+  background: #3cb0fd;
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+  border: 1px #2b71a0 solid;
+}

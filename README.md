@@ -2,10 +2,9 @@
 3C is a light weight screenshot tool, allowing you to screenshot cropped sections, your current screen, or the entire web page!
 
 # What can it do?
-* Capture an entire Web page from top too bottom.
-* Crop a section of the page.
-* Or simplye just get the current view.
+* Capture an entire Web page from top too bottom, Crop a section of the page, Or simplye just get the current view.
 * Opens the image in an editor allowing you to edit and save your image.
+* Download or Share your image directly to Imgur.
 * We're adding features all of the time, have a request, let us know.
 * It's also Open Source, so not only can you [Fork us over at GitHub](https://github.com/VirtexEdgeDesign/3C-Crop-Capture-Create), but it comes with full transparency so you can reset assured there's no bloat or malware.
 

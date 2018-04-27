@@ -1,0 +1,39 @@
+.ui-btn-capture {
+  background: #0099ff;
+  background-image: -webkit-linear-gradient(top, #0099ff, #2187c2);
+  background-image: -moz-linear-gradient(top, #0099ff, #2187c2);
+  background-image: -ms-linear-gradient(top, #0099ff, #2187c2);
+  background-image: -o-linear-gradient(top, #0099ff, #2187c2);
+  background-image: linear-gradient(to bottom, #0099ff, #2187c2);
+  -webkit-border-radius: 6;
+  -moz-border-radius: 6;
+  border-radius: 8px;
+  text-shadow: 1px 2px 0px #000000;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 5px 20px 5px 20px;
+  text-decoration: none;
+  border: 1px solid green;
+  position: absolute;
+}
+
+.ui-btn-capture:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+.ui-btn-capture[btntype='cancel']:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}

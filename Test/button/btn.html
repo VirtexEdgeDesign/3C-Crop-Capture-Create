@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8>
+    <title>Button Test</title>
+    <style>
+        .ui-btn-capture {
+            background-image: linear-gradient(to bottom, #ff00aa, #b8008a);
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px black;
+            text-shadow: 1px 1px 0px #000000;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: #ffffff;
+            font-size: 14px;
+            padding: 5px 20px 5px 20px;
+            text-decoration: none;
+            border: 1px solid #740157;
+            position: absolute;
+            width: 100px;
+            height: 28px;
+        }
+
+        .ui-btn-capture:hover {
+            background-image: linear-gradient(to bottom, #3cb0fd, #084a75);
+            text-decoration: none;
+        }
+
+        .ui-btn-capture[data-btn='cancel'] {
+            /*background-image: linear-gradient(to bottom, #ff5757, #6e1212);*/
+            top: 48px;
+        }
+
+        .ui-btn-capture[data-btn='cancel']:hover {
+            background-image: linear-gradient(to bottom, #e92e1d, #530000);
+        }
+    </style>
+</head>
+
+<body>
+    <button class="ui-btn-capture">Capture</button>
+    <button class="ui-btn-capture" data-btn="cancel">Cancel</button>
+</body>
+</html
