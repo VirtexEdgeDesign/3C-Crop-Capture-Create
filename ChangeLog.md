@@ -1,5 +1,10 @@
 # Change Log
 
+# v 1.2.0 - 2018/07/05
+
+* Streamlined Imgur Redirect URL.
+* Improved permission requests.
+
 # v 1.1.0 - 2018/05/01
 
 * Added Share to Imgur, Twitter, Facebook, Pinterest and Reddit Sharing support.
